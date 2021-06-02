@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form action="#" method="post">
+                <form action="{% url 'buscar' %}" method="post">
                     <input type="search" name="search" placeholder="O que está procurando...">
                     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
@@ -35,7 +35,11 @@
             <!-- Single Best Receipe Area -->
             <div class="col-12 col-sm-6 col-lg-4">
                 <div class="single-best-receipe-area mb-30">
-                    <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                    {% if receita.foto_receita == '' %}
+                        <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                    {% else %}
+                        <img src="{{ receita.foto_receita.url }}" alt="">
+                    {% endif %}
                     <div class="receipe-content">
                         <a href="{% url 'receita' receita.id %}">
                             <h5>{{ receita.nome_receita }}</h5>

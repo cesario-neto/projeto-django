@@ -2,8 +2,6 @@ from django.shortcuts import render, get_list_or_404, get_object_or_404
 from .models import receita
 
 def index(request):
-
-    
     receitas = receita.objects.order_by('-data_receita').filter(publicado=True)
 
     dados = {
@@ -11,8 +9,6 @@ def index(request):
     }
 
     return render(request,'index.html' ,dados)
-
-
 
 def Receita(request, receita_id):
     recipe = get_object_or_404(receita, pk=receita_id)
@@ -22,3 +18,6 @@ def Receita(request, receita_id):
     }
 
     return render(request, 'receita.html', receita_a_exibir)
+
+def Buscar (request):
+    return render(request, 'buscar.html')
