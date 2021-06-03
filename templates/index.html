@@ -7,24 +7,9 @@
     <img src="{% static 'img/core-img/pizza.png' %} " alt="">
 </div>
 
-<!-- Search Wrapper -->
-<div class="search-wrapper">
-    <!-- Close Btn -->
-    <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
+{% include 'partials\_busca.html' %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <form action="{% url 'buscar' %}">
-                    <input type="text" name="buscar" placeholder="O que está procurando...">
-                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-{% include 'partials\menu.html' %}
+{% include 'partials\_menu.html' %}
 
 <!-- ##### Best Receipe Area Start ##### -->
 <section class="best-receipe-area">
@@ -49,14 +34,11 @@
             </div>
             {% endfor %}
             {% else %}
-            <div class="col-12 col-sm-6 col-lg-4">
-                <p>receita não encontrada</p>
-            </div>
             {% endif %}
         </div>
     </div>
 </section>
 <!-- ##### Best Receipe Area End ##### -->
 
-{% include 'partials/footer.html' %}
+{% include 'partials/_footer.html' %}
 {% endblock %}
