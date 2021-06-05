@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import User
-from django.contrib import auth
+from django.contrib import auth, messages
 from receitas.models import receita
 
 def cadastro(request):
@@ -9,21 +9,24 @@ def cadastro(request):
         email = request.POST['email']
         senha = request.POST['password']
         senha2 = request.POST['password2']
-        if not nome.strip():
-             print('O campo nome não pode ficar vazio')
-             return redirect('cadastro')
-        if not email.strip():
-            print('O campo email não pode ficar vazio')
+        if campo_vazio(nome):
+            messages.error(request, 'O campo nome não pode ficar vazio')
             return redirect('cadastro')
-        if senha != senha2:
-            print('As senhas não são iguais')
+        if campo_vazio(email):
+            messages.error(request, 'O campo email não pode ficar vazio')
+            return redirect('cadastro')
+        if senha_nao_sao_iguais(senha, senha2):
+            messages.error(request, 'As senhas não são iguais')
             return redirect('cadastro')
         if User.objects.filter(email=email).exists():
-            print('Usuário ja cadastrado')
+            messages.error(request, 'Usuário ja cadastrado')
+            return redirect('cadastro')
+        if User.objects.filter(username=nome).exists():
+            messages.error(request, 'Usuário ja cadastrado')
             return redirect('cadastro')
         user = User.objects.create_user(username=nome, email=email, password=senha)
         User.save
-        print('Usuário cadastrado com sucesso')
+        messages.success(request, 'Usuário cadastrado com sucesso')
         return redirect('login')
     else:
         return render(request,'usuarios/cadastro.html')
@@ -78,3 +81,9 @@ def cria_receita(request):
         return redirect('dashboard')
     else:
         return render(request, 'usuarios/cria_receita.html')
+
+def senha_nao_sao_iguais(senha, senha2):
+    return senha != senha2
+
+def campo_vazio(campo):
+    return not campo.strip()
