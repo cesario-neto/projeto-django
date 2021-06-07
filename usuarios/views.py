@@ -82,6 +82,16 @@ def cria_receita(request):
     else:
         return render(request, 'usuarios/cria_receita.html')
 
+def deleta_receita(request, receita_id):
+    recipe = get_object_or_404(receita, pk=receita_id)
+    recipe.delete()
+    return redirect ('dashboard')
+
+def edita_receita(request, receita_id):
+    recipe = get_object_or_404(receita, pk=receita_id)
+    receita_a_edita = { 'recipe': recipe }
+    return render(request, 'usuarios/edita_receita.html', receita_a_edita)
+
 def senha_nao_sao_iguais(senha, senha2):
     return senha != senha2
 
