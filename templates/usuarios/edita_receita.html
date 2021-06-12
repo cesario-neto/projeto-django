@@ -26,37 +26,37 @@
             <div class="col-12">
             <p>Todos os campos são obrigatórios</p>
                 <div class="contact-form-area">
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="{% url 'atualiza_receita' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <input type="text" id="receita_id" class="form-control" name="receita_id" value="{{receita.id}}" hidden>
+                            <input type="text" id="receita_id" class="form-control" name="receita_id" value="{{recipe.id}}" hidden>
                         <div class="row">
                             <div class="col-12 col-lg-12">
                                 <label for="nome_receita"><b>Título da receita</b></label>
-                                <input type="text" id="nome_receita" class="form-control" name="nome_receita" placeholder="Ex. Suco de limão" value="{{receita.nome_receita}}" required>
+                                <input type="text" id="nome_receita" class="form-control" name="nome_receita" placeholder="Ex. Suco de limão" value="{{ recipe.nome_receita }}" required>
                             </div>
                             <div class="col-12">
                                 <label for="file"><b>Ingredientes</b></label>
-                                <textarea class="form-control" name="ingredientes" cols="30" rows="10" placeholder="Ex. 2 Limões &#10;200ml de água" required>{{receita.ingredientes}}</textarea>
+                                <textarea class="form-control" name="ingredientes" cols="30" rows="10" placeholder="Ex. 2 Limões &#10;200ml de água" required>{{recipe.ingredientes}}</textarea>
                             </div>
                             <div class="col-12">
                                 <label for="file"><b>Modo de preparo</b></label>
-                                <textarea class="form-control" name="modo_preparo" cols="30" rows="10" placeholder="Ex. Corte o limão com cuidado e exprema no copo  &#10;Misture com a água e sirva." required>{{receita.modo_preparo}}</textarea>
+                                <textarea class="form-control" name="modo_preparo" cols="30" rows="10" placeholder="Ex. Corte o limão com cuidado e exprema no copo  &#10;Misture com a água e sirva." required>{{recipe.modo_preparo}}</textarea>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <label for="file"><b>Tempo de preparo (minutos)</b></label>
-                                <input type="number" class="form-control" name="tempo_preparo" placeholder="Ex. 2" value="{{receita.tempo_preparo}}" required>
+                                <input type="number" class="form-control" name="tempo_preparo" placeholder="Ex. 2" value="{{recipe.tempo_preparo}}" required>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <label for="file"><b>Rendimento</b></label>
-                                <input type="text" class="form-control" name="rendimento" placeholder="Ex. serve 1 pessoa" value="{{receita.rendimento}}" required>
+                                <input type="text" class="form-control" name="rendimento" placeholder="Ex. serve 1 pessoa" value="{{recipe.rendimento}}" required>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <label for="file"><b>Categoria da receita</b></label>
-                                <input type="text" class="form-control" name="categoria" placeholder="Ex. Sucos e bebidas" value="{{receita.categoria}}"required>
+                                <input type="text" class="form-control" name="categoria" placeholder="Ex. Sucos e bebidas" value="{{recipe.categoria}}"required>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <label for="file"><b>Foto utilizada</b></label>
-                                <img src="{{ receita.foto_receita.url }}" alt="">
+                                <img src="{{ recipe.foto_receita.url }}" alt="">
                             </div>
                             <div class="col-12 col-lg-4">
                                 <label for="file"><b>Adicionar nova foto</b></label>

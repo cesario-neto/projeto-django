@@ -66,34 +66,9 @@ def dashboard (request):
     else:
         return redirect('index')
     
-def cria_receita(request):
-    if request.method == 'POST':
-        nome_receita = request.POST['nome_receita']
-        ingredientes = request.POST['ingredientes']
-        modo_preparo = request.POST['modo_preparo']
-        tempo_preparo = request.POST['tempo_preparo']
-        rendimento = request.POST['rendimento']
-        categoria = request.POST['categoria']
-        foto_receita = request.FILES['foto_receita']
-        user = get_object_or_404(User, pk=request.user.id)
-        recipe = receita.objects.create(pessoa=user, nome_receita=nome_receita, ingredientes=ingredientes, modo_preparo=modo_preparo, tempo_preparo=tempo_preparo, rendimento=rendimento, categoria=categoria, foto_receita=foto_receita)
-        recipe.save()   
-        return redirect('dashboard')
-    else:
-        return render(request, 'usuarios/cria_receita.html')
-
-def deleta_receita(request, receita_id):
-    recipe = get_object_or_404(receita, pk=receita_id)
-    recipe.delete()
-    return redirect ('dashboard')
-
-def edita_receita(request, receita_id):
-    recipe = get_object_or_404(receita, pk=receita_id)
-    receita_a_edita = { 'recipe': recipe }
-    return render(request, 'usuarios/edita_receita.html', receita_a_edita)
-
 def senha_nao_sao_iguais(senha, senha2):
     return senha != senha2
 
 def campo_vazio(campo):
     return not campo.strip()
+
